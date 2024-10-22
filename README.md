@@ -16,4 +16,4 @@ Este projeto implementa um sistema completo de operações CRUD (Criar, Ler, Atu
 - **Criptografia**: Criptografia de César
 
 ## Observações 📌
-Este projeto é um trabalho da faculdade de Análise e Desenvolvimento de Sistemas, turma do 2 semestre da universidade Unicesumar Maringá. Ele foi desenvolvido com o objetivo de praticar conceitos de lógica de programação e algoritmos em linguagem C e manipulação de dados. 🎓
+Este projeto é um trabalho da faculdade de Análise e Desenvolvimento de Sistemas, turma do 2 semestre da universidade Unicesumar Maringá. Ele foi desenvolvido com o objetivo de praticar conceitos de lógica de programação e algoritmos em linguagem C. 🎓
