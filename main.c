@@ -3,17 +3,18 @@
 #include <locale.h>
 #include <windows.h>
 #include <conio.h>
+#include <string.h>
 #define MAX_USUARIOS 50
 
 void linhaCol(int lin, int col) { // PROCEDIMENTO PARA POSICIONAR O CURSOR NO CONSOLE
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){col-1, lin-1});
 }
 
-enum { // CORES DE OPÇÕES DE LETRAS
+enum { // CORES DE OPï¿½ï¿½ES DE LETRAS
 	BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY, DARKGRAY, LIGHTBLUE, LIGHTGREEN, LIGHTCYAN, LIGHTRED, LIGHTMAGENTA, YELLOW, WHITE
 };
 
-enum { // CORES DAS OPÇÕES DE FUNDO
+enum { // CORES DAS OPï¿½ï¿½ES DE FUNDO
 	_BLACK=0, _BLUE=16, _GREEN=32, _CYAN=48, _RED=64, _MAGENTA=80, _BROWN=96, _LIGHTGRAY=112, _DARKGRAY=128, 
 	_LIGHTBLUE=144, _LIGHTGREEN=160, _LIGHTCYAN=176, _LIGHTRED=192, _LIGHTMAGENTA=208, _YELLOW=224, _WHITE=240
 };
@@ -62,7 +63,7 @@ struct usuario {
 struct usuario u[MAX_USUARIOS];
 int total_usuarios = 0;
 
-// Prototipação da função menu
+// Prototipaï¿½ï¿½o da funï¿½ï¿½o menu
 void menu();
 
 void cadastrar() {
@@ -81,15 +82,15 @@ void cadastrar() {
     total_usuarios++; 
     printf("Usuario cadastrado com sucesso!\n");
     printf("\nPressione qualquer tecla para voltar ao menu...");
-    getch(); // Aguarda uma tecla antes de retornar ao menu, nos outros também funcionará assim
+    getch(); // Aguarda uma tecla antes de retornar ao menu, nos outros tambï¿½m funcionarï¿½ assim
     system("cls");
 }
 
 void listar() {
     system("cls");
-    printf("================ LISTA DE USUÁRIOS =================\n");
+    printf("================ LISTA DE USUï¿½RIOS =================\n");
     if (total_usuarios == 0) {
-        printf("Nenhum usuário cadastrado.\n\n");
+        printf("Nenhum usuï¿½rio cadastrado.\n\n");
     } else {
         for(int i = 0; i < total_usuarios; i++) {
             printf("Nome: %s\n", u[i].nome);
@@ -101,8 +102,42 @@ void listar() {
     getch();
 }
 
+void deletar(){
+    system("cls");
+
+    char nomeDel[50];
+
+    printf("Digite o nome do usuario que deseja deletar: ");
+    scanf("%s", &nomeDel);
+
+    int encontrado = -1;
+
+    for(int i=0;i < total_usuarios;i++){
+        if(strcmp(u[i].nome, nomeDel) == 0){
+            encontrado = i;
+            break;
+        }
+    } 
+
+    if(encontrado != -1){
+        for(int i=0;i < total_usuarios;i++){
+            u[i] = u[i+1];
+        }
+        total_usuarios--;
+        printf("Usuario deletado com sucesso!");
+        printf("\nPressione qualquer tecla para voltar ao menu...");
+        getch(); // Aguarda uma tecla antes de retornar ao menu, nos outros tambï¿½m funcionarï¿½ assim
+        system("cls");
+    } else {
+        printf("Usuario nao encontrado!");
+        printf("\nPressione qualquer tecla para voltar ao menu...");
+        getch(); // Aguarda uma tecla antes de retornar ao menu, nos outros tambï¿½m funcionarï¿½ assim
+        system("cls");
+    }
+}
+
 void menu() {
-    int opcao = 1;  // OPÇÃO INICIAL
+    int opcao = 1;  // OPï¿½ï¿½O INICIAL
     int tecla;
 
     textColor(WHITE, _BLACK);
@@ -114,12 +149,12 @@ void menu() {
     linhaCol(11, 31);
     printf("BEM VINDO AO CRUD!");    
     linhaCol(13, 22);
-    printf("Escolha a opção que deseja executar:");
+    printf("Escolha a opcao que deseja executar:");
 
-    // LAÇO DE REPETIÇÃO PARA MENU E NAVEGAÇÃO
+    // LAï¿½O DE REPETIï¿½ï¿½O PARA MENU E NAVEGAï¿½ï¿½O
     while (1) {
 
-        // Exibindo as opções e destacando a opção selecionada
+        // Exibindo as opï¿½ï¿½es e destacando a opï¿½ï¿½o selecionada
         for (int i = 1; i <= 5; i++) {
             linhaCol(14 + i, 27); 
 
@@ -127,47 +162,47 @@ void menu() {
             if (i == opcao) {
                 textColor(BLUE, _CYAN);  // Fundo ciano para a linha selecionada
             } else {
-                textColor(WHITE, _BLUE);  // Fundo azul padrão para outras linhas dentro da caixa
+                textColor(WHITE, _BLUE);  // Fundo azul padrï¿½o para outras linhas dentro da caixa
             }
 
             switch (i) {
-                case 1: printf("     Cadastrar Usuário     "); break;
-                case 2: printf("     Listar Usuários       "); break;
-                case 3: printf("     Atualizar Usuários    "); break;
-                case 4: printf("     Deletar Usuário       "); break;
+                case 1: printf("     Cadastrar Usuario     "); break;
+                case 2: printf("     Listar Usuarios       "); break;
+                case 3: printf("     Atualizar Usuarios    "); break;
+                case 4: printf("     Deletar Usuario       "); break;
                 case 5: printf("     Sair                  "); break;
             }
         }
 
         tecla = getch();
 
-        if (tecla == 224) { // NAVEGAÇÃO COM AS SETAS
+        if (tecla == 224) { // NAVEGAï¿½ï¿½O COM AS SETAS
             tecla = getch();
             if (tecla == 72 && opcao > 1) {
                 opcao--;
             } else if (tecla == 80 && opcao < 5) {
                 opcao++;
             }
-        } else if (tecla == 13) {  // Enter para selecionar a opção
+        } else if (tecla == 13) {  // Enter para selecionar a opï¿½ï¿½o
             break;
         }
     }
 
-    // Executa a opção selecionada e volta a cor para o preto e branco padrão do console
+    // Executa a opï¿½ï¿½o selecionada e volta a cor para o preto e branco padrï¿½o do console
     textColor(WHITE, _BLACK);
     
     switch (opcao) {
         case 1: cadastrar(); break;
         case 2: listar(); break;
         case 3: /* atualizar(); */ break;
-        case 4: /* deletar(); */ break;
+        case 4: deletar(); break;
         case 5: 
             linhaCol(23, 22);
             textColor(WHITE, _BLACK);
             return;
     }
 
-    menu();  // Retorna ao menu principal após executar a opção
+    menu();  // Retorna ao menu principal apï¿½s executar a opï¿½ï¿½o
 } 
 
 int main() {
