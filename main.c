@@ -102,13 +102,47 @@ void listar() {
     getch();
 }
 
+void atualizar(){
+    system("cls");
+    int encontrado = -1;
+    char nomeAt[50];
+    char senhaAt[50];
+
+    printf("Digite o nome do usuario que ira atualizar: ");
+    scanf("%s", nomeAt);
+
+    for(int i=0;i < total_usuarios;i++){
+        if(strcmp(u[i].nome, nomeAt) == 0){
+            encontrado = i;
+            printf("Digite a nova senha: ");
+            scanf("%s", senhaAt);
+            break;
+        }
+        
+    } 
+    
+    if(encontrado != -1){
+        strcpy(u[encontrado].senha, senhaAt);
+        
+        printf("Usuario atualizado com sucesso!");
+        printf("\nPressione qualquer tecla para voltar ao menu...");
+        getch(); // Aguarda uma tecla antes de retornar ao menu, nos outros tamb�m funcionar� assim
+        system("cls");
+    } else {
+        printf("Usuario nao encontrado! Tente novamente");
+        printf("\nPressione qualquer tecla para voltar ao menu...");
+        getch(); // Aguarda uma tecla antes de retornar ao menu, nos outros tamb�m funcionar� assim
+        system("cls");
+    }
+}
+
 void deletar(){
     system("cls");
 
     char nomeDel[50];
 
     printf("Digite o nome do usuario que deseja deletar: ");
-    scanf("%s", &nomeDel);
+    scanf("%s", nomeDel);
 
     int encontrado = -1;
 
@@ -194,7 +228,7 @@ void menu() {
     switch (opcao) {
         case 1: cadastrar(); break;
         case 2: listar(); break;
-        case 3: /* atualizar(); */ break;
+        case 3: atualizar(); break;
         case 4: deletar(); break;
         case 5: 
             linhaCol(23, 22);
