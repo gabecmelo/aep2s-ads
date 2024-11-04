@@ -159,7 +159,7 @@ void cadastrar() {
 		return;
     }
     linhaCol(20, 1);
-    for (int i = 0; i < 80; i++) {
+    for (int i = 0; i < 100; i++) {
         printf(" ");
     }
     
