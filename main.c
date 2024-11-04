@@ -28,7 +28,7 @@ void textColor(int letras, int fundo) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), letras + fundo);
 }
 
-void box(int lin1, int col1, int lin2, int col2) { // CRIAÇÃO DA CAIXA
+void box(int lin1, int col1, int lin2, int col2) { // CRIAï¿½ï¿½O DA CAIXA
     int i, j;
     linhaCol(lin1, col1);
     printf("+");
@@ -59,7 +59,7 @@ void box(int lin1, int col1, int lin2, int col2) { // CRIAÇÃO DA CAIXA
 struct usuario u[MAX_USUARIOS];
 int total_usuarios = 0;
 
-void cifraCesar(char *senha) { // CRIPTOGRAFIA: funciona com números de 0 - 9, e letras de A - Z || a - z (+13 de deslocamento de caracteres)
+void cifraCesar(char *senha) { // CRIPTOGRAFIA: funciona com nï¿½meros de 0 - 9, e letras de A - Z || a - z (+13 de deslocamento de caracteres)
     for (int i = 0; senha[i] != '\0'; i++) {
         if (senha[i] >= 'A' && senha[i] <= 'Z') {
             senha[i] = ((senha[i] - 'A' + 13) % 26) + 'A';
@@ -95,7 +95,7 @@ void carregarUsuarios() {
     fclose(file);
 }
 
-int selecionarUsuario() { // Função para exibir e escolher um usuário pela lista
+int selecionarUsuario() { // Funï¿½ï¿½o para exibir e escolher um usuï¿½rio pela lista
     int selecionado = 0;
     int tecla;
 
@@ -108,7 +108,7 @@ int selecionarUsuario() { // Função para exibir e escolher um usuário pela lista
         linhaCol(6, 22);
         printf("Selecione um usuario usando as setas:");
         
-        for (int i = 0; i < total_usuarios; i++) { // Exibe os usuários e destaca o selecionado
+        for (int i = 0; i < total_usuarios; i++) { // Exibe os usuï¿½rios e destaca o selecionado
             linhaCol(8 + i, 25);
             if (i == selecionado) {
                 textColor(BLUE, _CYAN); 
@@ -119,17 +119,17 @@ int selecionarUsuario() { // Função para exibir e escolher um usuário pela lista
             textColor(WHITE, _BLACK);
         }
 
-        tecla = getch(); // Navegação com as setas
+        tecla = getch(); // Navegaï¿½ï¿½o com as setas
         if (tecla == 224) {
             tecla = getch();
             if (tecla == 72) {  // Seta para cima
                 if (selecionado <= 0) {
-                    selecionado = total_usuarios - 1; // Se estiver no primeiro usuário, vai para o último
+                    selecionado = total_usuarios - 1; // Se estiver no primeiro usuï¿½rio, vai para o ï¿½ltimo
                 } else {
                     selecionado--;
                 }
             } else if (tecla == 80) {  // Seta para baixo
-                if (selecionado >= total_usuarios - 1) { // Se estiver no primeiro usuário, vai para o primeiro
+                if (selecionado >= total_usuarios - 1) { // Se estiver no primeiro usuï¿½rio, vai para o primeiro
                     selecionado = 0;
                 } else {
                     selecionado++;
@@ -147,7 +147,7 @@ void cadastrar() {
     textColor(WHITE, _BLUE);
     box(10, 20, 18, 60);
     linhaCol(11, 22);
-    printf("         CADASTRO DE USUÁRIOS\n");
+    printf("         CADASTRO DE USUARIOS\n");
     
     linhaCol(20, 1);
     textColor(WHITE, _BLACK);
