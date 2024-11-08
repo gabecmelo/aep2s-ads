@@ -11,6 +11,8 @@ struct usuario {
     char senha[50];
 };
 
+int i;
+
 void linhaCol(int lin, int col) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){col-1, lin-1});
 }
@@ -60,7 +62,7 @@ struct usuario u[MAX_USUARIOS];
 int total_usuarios = 0;
 
 void cifraCesar(char *senha) { // CRIPTOGRAFIA: funciona com n�meros de 0 - 9, e letras de A - Z || a - z (+13 de deslocamento de caracteres)
-    for (int i = 0; senha[i] != '\0'; i++) {
+    for (i = 0; senha[i] != '\0'; i++) {
         if (senha[i] >= 'A' && senha[i] <= 'Z') {
             senha[i] = ((senha[i] - 'A' + 13) % 26) + 'A';
         } else if (senha[i] >= 'a' && senha[i] <= 'z') {
@@ -77,7 +79,7 @@ void salvarUsuarios() {
         printf("Erro ao abrir o arquivo para salvar!\n");
         return;
     }
-    for (int i = 0; i < total_usuarios; i++) {
+    for (i = 0; i < total_usuarios; i++) {
         fprintf(file, "%s %s\n", u[i].nome, u[i].senha);
     }
     fclose(file);
@@ -108,7 +110,7 @@ int selecionarUsuario() { // Fun��o para exibir e escolher um usu�rio pela
         linhaCol(6, 22);
         printf("Selecione um usuario usando as setas:");
         
-        for (int i = 0; i < total_usuarios; i++) { // Exibe os usu�rios e destaca o selecionado
+        for (i = 0; i < total_usuarios; i++) { // Exibe os usu�rios e destaca o selecionado
             linhaCol(8 + i, 25);
             if (i == selecionado) {
                 textColor(BLUE, _CYAN); 
@@ -159,7 +161,7 @@ void cadastrar() {
 		return;
     }
     linhaCol(20, 1);
-    for (int i = 0; i < 100; i++) {
+    for (i = 0; i < 100; i++) {
         printf(" ");
     }
     
@@ -192,7 +194,7 @@ void listar() {
     linhaCol(6, 22);
     printf("        USUARIOS CADASTRADOS:");
     
-    for (int i = 0; i < total_usuarios; i++) {
+    for (i = 0; i < total_usuarios; i++) {
         linhaCol(8 + i, 25);
         textColor(WHITE, _BLUE);
         printf("%i - %s", i + 1, u[i].nome);
@@ -255,7 +257,7 @@ void deletar() {
     cifraCesar(senhaDel);
 
     if (strcmp(u[usuarioSelecionado].senha, senhaDel) == 0) {
-        for (int i = usuarioSelecionado; i < total_usuarios - 1; i++) {
+        for (i = usuarioSelecionado; i < total_usuarios - 1; i++) {
             u[i] = u[i + 1];
         }
         total_usuarios--;
@@ -291,7 +293,7 @@ void menu() {
     printf(" Escolha a opcao que deseja executar:");
 
     while (1) {
-        for (int i = 1; i <= 5; i++) {
+        for (i = 1; i <= 5; i++) {
             linhaCol(14 + i, 27); 
 
             if (i == opcao) {
